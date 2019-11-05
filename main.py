@@ -4,6 +4,7 @@ screen_width = 576
 screen_height = 512
 screen_mode = (screen_width, screen_height)
 
+pygame.init()
 pygame.display.init()
 screen = pygame.display.set_mode(screen_mode)
 pygame.display.set_caption("Flappy Bird")
@@ -35,6 +36,20 @@ def draw_player():
     screen.blit(player_image, (player_x, player_y))
 
 
+score = 10
+
+
+def text(text, tam, color):
+    font = pygame.font.Font("assets/fonts/Flappy-Bird.ttf", tam)
+    text = font.render("{}".format(text), True, color)
+    screen.blit(text, ((screen_width/2 - 20), 0))
+
+
+def hud():
+    text(score, 64, (0, 0, 0))
+    text(score, 58, (255, 255, 255))
+
+
 playing = True
 while playing:
     # Eventos
@@ -44,4 +59,5 @@ while playing:
     draw_background()
     draw_bases()
     draw_player()
+    hud()
     pygame.display.update()
