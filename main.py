@@ -50,6 +50,16 @@ def hud():
     text(score, 58, (255, 255, 255))
 
 
+def main_menu():
+    font = pygame.font.Font("assets/fonts/Flappy-Bird.ttf", 70)
+    text = font.render("Flappy Bird", True, (0, 0, 0))
+    screen.blit(text, (160,90))
+    font2 = pygame.font.Font("assets/fonts/Flappy-Bird.ttf", 70)
+    text2 = font.render("Flappy Bird", True, (255, 255, 255))
+    screen.blit(text2, (165,85))
+
+
+
 playing = True
 while playing:
     # Eventos
