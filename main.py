@@ -32,6 +32,7 @@ player_x, player_y = 170, 200
 player_dy = 1
 player_angle = 0
 
+
 def jump():
     print("JUMP")
 
@@ -49,9 +50,11 @@ def draw_bases():
     if base_x <= -96:
         base_x = 0
 
+
 def update_player():
     # player_y += player_dy
     pass
+
 
 def draw_player():
     global player_y
@@ -74,14 +77,17 @@ def hud():
 
 def main_menu():
     start = pygame.image.load('assets/sprites/message.png')
-    screen.blit(start, (195,90))
+    screen.blit(start, (195, 90))
 
 
 def gameover():
     end = pygame.image.load('assets/sprites/gameover.png')
-    screen.blit(end, (195,200))
+    screen.blit(end, (195, 200))
+
 
 playing = True
+
+
 while playing:
     events = pygame.event.get()
     for event in events:
@@ -100,7 +106,7 @@ while playing:
     draw_player()
 
     hud()
-    
+
     pygame.display.update()
     clock.tick(window_fps)
     print("FPS:", clock.get_fps())
