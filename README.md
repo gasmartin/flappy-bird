@@ -11,4 +11,4 @@
 ## Áudio e Sprites
 
 - [FlapPyBird - Assets](https://github.com/sourabhv/FlapPyBird/tree/master/assets)
-- [Créditos-Fonte]((http://fontstruct.com/fontstructions/show/1026901))
+- [Créditos-Fonte](http://fontstruct.com/fontstructions/show/1026901)
