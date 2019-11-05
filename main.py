@@ -16,9 +16,11 @@ base_x = 0
 player_image = pygame.image.load("assets/sprites/yellowbird-midflap.png")
 player_x, player_y = 170, 200
 
+
 def draw_background():
     screen.blit(background_image, (0, 0))
     screen.blit(background_image, (288, 0))
+
 
 def draw_bases():
     global base_x
@@ -28,8 +30,10 @@ def draw_bases():
     if base_x <= -96:
         base_x = 0
 
+
 def draw_player():
     screen.blit(player_image, (player_x, player_y))
+
 
 playing = True
 while playing:
