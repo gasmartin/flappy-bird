@@ -7,3 +7,7 @@
 - [Gabriel San Martin](https://github.com/gasmartin)
 - [Gonzalo Ivan](https://github.com/ivanportales)
 - [Jose Jordan Giordano](https://github.com/JordanJose)
+
+## Áudio e Sprites
+
+- [FlapPyBird - Assets](https://github.com/sourabhv/FlapPyBird/tree/master/assets)
