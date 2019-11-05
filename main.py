@@ -9,6 +9,15 @@ pygame.display.init()
 screen = pygame.display.set_mode(screen_mode)
 pygame.display.set_caption("Flappy Bird")
 
+# importação dos efeitos sonoros
+sounds = dict()
+sounds['die'] = pygame.mixer.Sound('assets/audio/die.wav')
+sounds['hit'] = pygame.mixer.Sound('assets/audio/hit.wav')
+sounds['point'] = pygame.mixer.Sound('assets/audio/point.wav')
+sounds['swoosh'] = pygame.mixer.Sound('assets/audio/swoosh.wav')
+sounds['wing'] = pygame.mixer.Sound('assets/audio/wing.wav')
+
+
 background_image = pygame.image.load("assets/sprites/background-day.png")
 
 base_image = pygame.image.load("assets/sprites/base.png")
@@ -51,22 +60,13 @@ def hud():
 
 
 def main_menu():
-    font = pygame.font.Font("assets/fonts/Flappy-Bird.ttf", 70)
-    text = font.render("Flappy Bird", True, (0, 0, 0))
-    screen.blit(text, (160,90))
-    font2 = pygame.font.Font("assets/fonts/Flappy-Bird.ttf", 70)
-    text2 = font.render("Flappy Bird", True, (255, 255, 255))
-    screen.blit(text2, (165,85))
+    start = pygame.image.load('assets/sprites/message.png')
+    screen.blit(start, (195,90))
 
 
 def gameover():
-    font = pygame.font.Font("assets/fonts/Flappy-Bird.ttf", 70)
-    text = font.render("Game Over", True, (255, 0, 0))
-    screen.blit(text, (165,200))
-    font2 = pygame.font.Font("assets/fonts/Flappy-Bird.ttf", 70)
-    text2 = font.render("Game Over", True, (0, 0, 0))
-    screen.blit(text2, (160,195))
-
+    end = pygame.image.load('assets/sprites/gameover.png')
+    screen.blit(end, (195,200))
 
 playing = True
 while playing:
@@ -79,3 +79,5 @@ while playing:
     draw_player()
     hud()
     pygame.display.update()
+
+pygame.quit()
