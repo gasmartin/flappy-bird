@@ -59,6 +59,14 @@ def main_menu():
     screen.blit(text2, (165,85))
 
 
+def gameover():
+    font = pygame.font.Font("assets/fonts/Flappy-Bird.ttf", 70)
+    text = font.render("Game Over", True, (255, 0, 0))
+    screen.blit(text, (165,200))
+    font2 = pygame.font.Font("assets/fonts/Flappy-Bird.ttf", 70)
+    text2 = font.render("Game Over", True, (0, 0, 0))
+    screen.blit(text2, (160,195))
+
 
 playing = True
 while playing:
