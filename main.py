@@ -1,33 +1,27 @@
-import pygame
+import pygame as pg
+from settings import *
 
-screen_width = 576
-screen_height = 512
-screen_mode = (screen_width, screen_height)
-
-window_fps = 60
-
-pygame.init()
-pygame.display.init()
-screen = pygame.display.set_mode(screen_mode)
-pygame.display.set_caption("Flappy Bird")
-
-clock = pygame.time.Clock()
+pg.init()
+pg.mixer.init()
+screen = pg.display.set_mode(MODE)
+pg.display.set_caption(TITLE)
+clock = pg.time.Clock()
 
 # importação dos efeitos sonoros
 sounds = dict()
-sounds['die'] = pygame.mixer.Sound('assets/audio/die.wav')
-sounds['hit'] = pygame.mixer.Sound('assets/audio/hit.wav')
-sounds['point'] = pygame.mixer.Sound('assets/audio/point.wav')
-sounds['swoosh'] = pygame.mixer.Sound('assets/audio/swoosh.wav')
-sounds['wing'] = pygame.mixer.Sound('assets/audio/wing.wav')
+sounds['die'] = pg.mixer.Sound('assets/audio/die.wav')
+sounds['hit'] = pg.mixer.Sound('assets/audio/hit.wav')
+sounds['point'] = pg.mixer.Sound('assets/audio/point.wav')
+sounds['swoosh'] = pg.mixer.Sound('assets/audio/swoosh.wav')
+sounds['wing'] = pg.mixer.Sound('assets/audio/wing.wav')
 
 
-background_image = pygame.image.load("assets/sprites/background-day.png")
+background_image = pg.image.load("assets/sprites/background-day.png")
 
-base_image = pygame.image.load("assets/sprites/base.png")
+base_image = pg.image.load("assets/sprites/base.png")
 base_x = 0
 
-player_image = pygame.image.load("assets/sprites/yellowbird-midflap.png")
+player_image = pg.image.load("assets/sprites/yellowbird-midflap.png")
 player_x, player_y = 170, 200
 player_dy = 1
 player_angle = 0
@@ -65,9 +59,9 @@ score = 10
 
 
 def text(text, tam, color):
-    font = pygame.font.Font("assets/fonts/Flappy-Bird.ttf", tam)
+    font = pg.font.Font("assets/fonts/Flappy-Bird.ttf", tam)
     text = font.render("{}".format(text), True, color)
-    screen.blit(text, ((screen_width/2 - 20), 0))
+    screen.blit(text, ((WIDTH/2 - 20), 0))
 
 
 def hud():
@@ -76,12 +70,12 @@ def hud():
 
 
 def main_menu():
-    start = pygame.image.load('assets/sprites/message.png')
+    start = pg.image.load('assets/sprites/message.png')
     screen.blit(start, (195, 90))
 
 
 def gameover():
-    end = pygame.image.load('assets/sprites/gameover.png')
+    end = pg.image.load('assets/sprites/gameover.png')
     screen.blit(end, (195, 200))
 
 
@@ -89,15 +83,17 @@ playing = True
 
 
 while playing:
-    events = pygame.event.get()
+    clock.tick(FPS)
+
+    events = pg.event.get()
     for event in events:
-        if event.type == pygame.QUIT:
+        if event.type == pg.QUIT:
             playing = False
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
+        elif event.type == pg.KEYDOWN:
+            if event.key == pg.K_SPACE:
                 jump()
 
-    screen.fill((0, 0, 0))
+    screen.fill(BLACK)
 
     draw_background()
     draw_bases()
@@ -107,8 +103,6 @@ while playing:
 
     hud()
 
-    pygame.display.update()
-    clock.tick(window_fps)
-    print("FPS:", clock.get_fps())
+    pg.display.update()
 
-pygame.quit()
+pg.quit()

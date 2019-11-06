@@ -1,0 +1,7 @@
+WIDTH = 576
+HEIGHT = 512
+MODE = (WIDTH, HEIGHT)
+
+TITLE = "Flappy Bird"
+FPS = 60
+BLACK = (0, 0, 0)
