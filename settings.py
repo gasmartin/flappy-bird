@@ -6,4 +6,4 @@ TITLE = "Flappy Bird"
 FPS = 60
 BLACK = (0, 0, 0)
 
-BIRD_GAP = 100
+BIRD_GAP = 120

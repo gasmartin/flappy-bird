@@ -22,10 +22,15 @@ background_image = pg.image.load("assets/sprites/background-day.png")
 base_image = pg.image.load("assets/sprites/base.png")
 base_x = 0
 
+vec = pg.math.Vector2
+
 player_image = pg.image.load("assets/sprites/yellowbird-midflap.png")
-player_x, player_y = 170, 200
+player_pos = vec(100, 100)
 player_dy = 1
 player_angle = 0
+player_vel = vec(0, 0)
+player_acc = vec(0, 1.8)
+gravity = vec(0, 0.8)
 
 pipe_top_image = pg.image.load("assets/sprites/pipe-green-top.png")
 pipe_bottom_image = pg.image.load("assets/sprites/pipe-green-bottom.png")
@@ -35,16 +40,18 @@ pipes = []
 
 def generate_pipe():
     pipe = {}
-    gap_y = randint(40, 260)
+    gap_y = randint(60, 240)
     pipe['pipe_top_x'] = WIDTH + 50
     pipe['pipe_top_y'] = gap_y - 320
     pipe['pipe_bottom_x'] = WIDTH + 50
     pipe['pipe_bottom_y'] = gap_y + BIRD_GAP
+    pipe['has_passed'] = False
     return pipe
 
 
 def jump():
-    print("JUMP")
+    global player_vel
+    player_vel.y = -11
 
 
 def draw_background():
@@ -78,17 +85,18 @@ def draw_pipes():
 
 
 def update_player():
-    global player_y
-    player_y += player_dy
-    pass
+    global player_pos, player_vel
+    if player_vel.y <= 0:
+        player_vel += gravity
+    player_pos += player_vel + player_acc
 
 
 def draw_player():
     global player_y
-    screen.blit(player_image, (player_x, player_y))
+    screen.blit(player_image, player_pos)
 
 
-score = 10
+score = 0
 
 
 def text(text, tam, color):
@@ -132,8 +140,21 @@ while playing:
     update_pipes()
 
     for pipe in pipes:
-        if pipe['pipe_top_x'] == 450:
+        player_rect = pg.Rect(player_pos.x, player_pos.y, 34, 24)
+        pipe_top_rect = pg.Rect(pipe['pipe_top_x'], pipe['pipe_top_y'], 52, 320)
+        pipe_bottom_rect = pg.Rect(pipe['pipe_bottom_x'], pipe['pipe_bottom_y'], 52, 320)
+        if player_pos.x > pipe['pipe_top_x'] and not pipe['has_passed']:
+            score += 1
+            pipe['has_passed'] = not pipe['has_passed']
+            print(score)
+        if player_rect.colliderect(pipe_top_rect) or \
+            player_rect.colliderect(pipe_bottom_rect):
+            playing = False
+            break
+        if pipe['pipe_top_x'] == 420:
             pipes.append(generate_pipe())
+        elif pipe['pipe_top_x'] + 55 <= 0:
+            pipes.remove(pipe)
 
     screen.fill(BLACK)
 
